@@ -77,3 +77,36 @@ export interface NistControl {
   mapping: FrameworkMapping;
   subControls: SubControl[];
 }
+export type RiskSeverity = 'Low' | 'Medium' | 'High' | 'Critical';
+export type ControlStatus = 'Implemented' | 'In Progress' | 'Not Implemented' | 'Under Review';
+
+export interface RiskItem {
+  id: string;
+  title: string;
+  category: string;
+  impact: number; // 1-5
+  likelihood: number; // 1-5
+  score: number; // impact * likelihood
+  severity: RiskSeverity;
+  owner: string;
+  mitigationPlan: string;
+}
+
+export interface ComplianceControl {
+  id: string;
+  framework: 'ISO 27001' | 'NIST CSF' | 'SOC 2' | 'GDPR';
+  code: string;
+  title: string;
+  status: ControlStatus;
+  owner: string;
+  lastAuditDate: string;
+}
+
+export interface VendorAssessment {
+  id: string;
+  vendorName: string;
+  serviceProvided: string;
+  riskLevel: RiskSeverity;
+  dueDiligenceStatus: 'Completed' | 'Pending Review' | 'Action Required';
+  lastReviewed: string;
+}
